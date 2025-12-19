@@ -1,3 +1,0 @@
-User-Agent: *
-Disallow:
-Sitemap: https://abhaybhat.tech/sitemap.xml
