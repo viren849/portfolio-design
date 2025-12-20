@@ -175,13 +175,13 @@ let projects = [
 		'github': 'https://github.com/viren849/hft_system',
 		'deploy': ''
 	}, {
-		'title': 'Distributed File System',
-		'subtitle': 'Systems | C++',
-		'desp': 'A distributed file system capable of handling large-scale data storage and retrieval across multiple nodes. focus on fault tolerance and consistency.',
+		'title': 'Visual LLM Pipeline Builder',
+		'subtitle': 'React Flow | FastAPI | Pydantic',
+		'desp': 'A visual, node-based pipeline editor for designing and validating LLM workflows. Supports drag-and-drop nodes, dynamic variable parsing with auto-generated connection handles, and backend DAG validation using Kahn’s Algorithm.',
 		'icon': '',
-		'technologies': ['cpp', 'linux', 'github', 'react'],
-		'github': 'https://github.com/viren849/dfs',
-		'deploy': ''
+		'technologies': ['react', 'js', 'python', 'fastapi', 'github'],
+		'github': 'https://github.com/viren849/LLM-Pipeline-Builder',
+		'deploy': 'https://llm-pipeline-builder.vercel.app/'
 	}, {
 		'title': 'Decentralised Chat App',
 		'subtitle': 'Blockchain | Solidity | Ethereum',

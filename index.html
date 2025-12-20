@@ -171,7 +171,14 @@
 							<p class="card-text card-subtitle">Software Developer</p>
 							<p>A software developer with robust problem-solving skills and proven experience in creating
 								softwares.</p>
-							<a href="/static/files/resume.pdf" target="_blank" class="btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 6px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>View Resume</a>
+							<a href="/static/files/resume.pdf" target="_blank" class="btn"><svg width="16" height="16"
+									viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+									stroke-linecap="round" stroke-linejoin="round"
+									style="vertical-align: middle; margin-right: 6px;">
+									<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+									<polyline points="7 10 12 15 17 10"></polyline>
+									<line x1="12" y1="15" x2="12" y2="3"></line>
+								</svg>View Resume</a>
 						</div>
 					</div>
 					<div class="column">
@@ -228,7 +235,8 @@
 				<h3 class="hide">This is about section where you can find information about my Projects.</h3>
 				<div class="background"></div>
 				<div class="skills-container">
-					<div class="hex-row m2">
+					<!-- Row 1: 2 skills -->
+					<div class="hex-row m1">
 						<div class="hex-cell" onclick="getProjects('java'); scrollToView('project-cards');">
 							<div class="cell-top"></div>
 							<div class="cell">
@@ -244,6 +252,10 @@
 							</div>
 							<div class="cell-bottom"></div>
 						</div>
+					</div>
+
+					<!-- Row 2: 3 skills -->
+					<div class="hex-row m3">
 						<div class="hex-cell" onclick="getProjects('cpp'); scrollToView('project-cards');">
 							<div class="cell-top" style="border-bottom-color: #03599C;"></div>
 							<div class="cell" style="background-color: #03599C;">
@@ -251,9 +263,6 @@
 							</div>
 							<div class="cell-bottom" style="border-top-color: #03599C;"></div>
 						</div>
-					</div>
-
-					<div class="hex-row">
 						<div class="hex-cell" onclick="getProjects('html'); scrollToView('project-cards');">
 							<div class="cell-top"></div>
 							<div class="cell">
@@ -268,6 +277,10 @@
 							</div>
 							<div class="cell-bottom"></div>
 						</div>
+					</div>
+
+					<!-- Row 3: 4 skills -->
+					<div class="hex-row m2">
 						<div class="hex-cell" onclick="getProjects('js'); scrollToView('project-cards');">
 							<div class="cell-top" style="border-bottom-color: #F0DB4F;"></div>
 							<div class="cell" style="background-color: #F0DB4F;">
@@ -282,10 +295,7 @@
 							</div>
 							<div class="cell-bottom"></div>
 						</div>
-					</div>
-
-					<div class="hex-row m2">
-						<div class="hex-cell" onclick="getProjects('github'); scrollToView('project-cards');">
+						<div class="hex-cell" onclick="getProjects('aws'); scrollToView('project-cards');">
 							<div class="cell-top"></div>
 							<div class="cell">
 								<img src="/static/images/projects/aws.svg" alt="aws" class="skill large">
@@ -300,7 +310,10 @@
 							</div>
 							<div class="cell-bottom" style="border-top-color: #61DAFB;"></div>
 						</div>
+					</div>
 
+					<!-- Row 4: 5 skills (Center) -->
+					<div class="hex-row">
 						<div class="hex-cell" onclick="getProjects('github'); scrollToView('project-cards');">
 							<div class="cell-top"></div>
 							<div class="cell">
@@ -308,9 +321,6 @@
 							</div>
 							<div class="cell-bottom"></div>
 						</div>
-					</div>
-
-					<div class="hex-row">
 						<div class="hex-cell" onclick="getProjects('mongodb'); scrollToView('project-cards');">
 							<div class="cell-top"></div>
 							<div class="cell">
@@ -341,11 +351,12 @@
 						</div>
 					</div>
 
+					<!-- Row 5: 4 skills -->
 					<div class="hex-row m2">
 						<div class="hex-cell" onclick="getProjects('nodejs'); scrollToView('project-cards');">
 							<div class="cell-top"></div>
 							<div class="cell">
-								<a><img src="/static/images/projects/nodejs.svg" alt="nodejs" class="skill large"></a>
+								<img src="/static/images/projects/nodejs.svg" alt="nodejs" class="skill large">
 							</div>
 							<div class="cell-bottom"></div>
 						</div>
@@ -360,6 +371,39 @@
 							<div class="cell-top"></div>
 							<div class="cell">
 								<img src="/static/images/projects/blockchain.svg" alt="blockchain" class="skill">
+							</div>
+							<div class="cell-bottom"></div>
+						</div>
+						<div class="hex-cell" onclick="getProjects('fastapi'); scrollToView('project-cards');">
+							<div class="cell-top"></div>
+							<div class="cell">
+								<img src="/static/images/projects/fastapi.svg" alt="fastapi" class="skill">
+							</div>
+							<div class="cell-bottom"></div>
+						</div>
+					</div>
+
+					<!-- Row 6: 3 skills -->
+					<div class="hex-row m3">
+						<div class="hex-cell" onclick="getProjects('solidity'); scrollToView('project-cards');">
+							<div class="cell-top"></div>
+							<div class="cell">
+								<img src="/static/images/projects/solidity.svg" alt="solidity" class="skill">
+							</div>
+							<div class="cell-bottom"></div>
+						</div>
+						<div class="hex-cell" onclick="getProjects('jenkins'); scrollToView('project-cards');">
+							<div class="cell-top"></div>
+							<div class="cell">
+								<img src="/static/images/projects/jenkins.svg" alt="jenkins" class="skill">
+							</div>
+							<div class="cell-bottom"></div>
+						</div>
+						<div class="hex-cell" onclick="getProjects('docker'); scrollToView('project-cards');">
+							<div class="cell-top"></div>
+							<div class="cell">
+								<img src="/static/images/projects/docker.svg" alt="docker" class="skill"
+									style="top: 0px;">
 							</div>
 							<div class="cell-bottom"></div>
 						</div>

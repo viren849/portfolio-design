@@ -578,7 +578,7 @@ p {
 .skills-container {
 	width: 100%;
 	display: table;
-	max-width: 320px;
+	max-width: 420px;
 	margin-bottom: 100px;
 	margin: 0 auto;
 }
@@ -636,12 +636,13 @@ p {
 }
 
 .hex-cell:hover .skill {
-	transform: scale(1.2);
+	transform: scale(1.1);
 }
 
 .hex-cell:hover {
 	filter: drop-shadow(0 0 10px #00ff66);
 	z-index: 100;
+	transform: scale(1.05);
 }
 
 .skill {
@@ -668,6 +669,10 @@ p {
 
 .m2 {
 	margin-left: 40px;
+}
+
+.m3 {
+	margin-left: 80px;
 }
 
 .project-skill-container {
