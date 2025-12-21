@@ -27,7 +27,7 @@
 			<!--50% background part-->
 			<div class="part1">
 				<div class="div1 padding" style="">
-					<div class="text main"><span style="color: #00ff66;">I am</span><br>Virender Kumar</div>
+					<div class="text main"><span style="color: var(--accent-color);">I am</span><br>Virender Kumar</div>
 					<div class="text med-height">
 						<span class="title" id="title1"></span> <span class="title left" id="title2"></span>
 					</div>
@@ -126,10 +126,18 @@
 					</div>
 				</a>
 				<a href="#reach-out">
-					<div class="tab lasttab" onclick="active(this, 'reach-out')">
+					<div class="tab" onclick="active(this, 'reach-out')">
 						<h2>Reach-out</h2>
 					</div>
 				</a>
+				<a href="#terminal">
+					<div class="tab lasttab" onclick="active(this, 'terminal')">
+						<h2>Terminal</h2>
+					</div>
+				</a>
+				<div class="theme-toggle" onclick="toggleTheme()">
+					<span id="theme-icon">🌓</span>
+				</div>
 			</div>
 			<a class="tab-btn" onclick="scrollDiv(+1)">
 				<svg viewBox="64 64 896 896" focusable="false" class="" data-icon="right" width="1em" height="1em"
@@ -412,6 +420,30 @@
 				<div style="margin: auto; margin-top: 100px; width: 90vw;" id="project-cards">
 				</div>
 			</section>
+
+			<section class="hide" id="terminal">
+				<div class="background"></div>
+				<div class="terminal-container">
+					<div class="terminal-header">
+						<div class="terminal-buttons">
+							<span class="t-btn red"></span>
+							<span class="t-btn yellow"></span>
+							<span class="t-btn green"></span>
+						</div>
+						<div class="terminal-title">bash — virender — 80×24</div>
+					</div>
+					<div class="terminal-body" id="terminal-body">
+						<div class="terminal-output" id="terminal-output">
+							<div>Welcome to Virender's Terminal. Type <span
+									style="color: var(--accent-color)">'help'</span> to see available commands.</div>
+						</div>
+						<div class="terminal-input-line">
+							<span class="terminal-prompt">viren@portfolio:~$</span>
+							<input type="text" id="terminal-input" autocomplete="off" spellcheck="false">
+						</div>
+					</div>
+				</div>
+			</section>
 			<section id="reach-out" class="hide" style="padding: 0;">
 				<h3 class="hide">This is about section where you can find informationon how to reach out to me.</h3>
 				<div class="wrapper" style="flex-direction: column;">
@@ -442,7 +474,7 @@
 							<span>repeat<span style="color: #C51057;">()</span>;</span>
 						</div>
 					</div>
-					<div class="row centered" style="color: #e5e5e5;">
+					<div class="row centered" style="color: var(--text-color);">
 						<p>Developer: Virender Kumar</p>
 					</div>
 					<div class="row">
@@ -474,5 +506,8 @@
 			</circle>
 		</svg>
 	</section>
+	<div class="cursor"></div>
+	<div class="cursor-dot"></div>
+
 	<script src="static/js/index.js"></script>
 </body>

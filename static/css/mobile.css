@@ -9,13 +9,13 @@
 	}
 
 	.hex-cell .cell-top {
-		border-bottom: 30px solid #fff;
+		border-bottom: 30px solid var(--card-inner-bg);
 		border-left: 52px solid transparent;
 		border-right: 52px solid transparent;
 	}
 
 	.hex-cell .cell-bottom {
-		border-top: 30px solid #fff;
+		border-top: 30px solid var(--card-inner-bg);
 		border-left: 52px solid transparent;
 		border-right: 52px solid transparent;
 	}
@@ -45,6 +45,15 @@
 
 	.large {
 		width: 80px;
+	}
+
+	.terminal-container {
+		margin: 20px;
+		height: 400px;
+	}
+
+	.terminal-body {
+		height: calc(100% - 40px);
 	}
 }
 

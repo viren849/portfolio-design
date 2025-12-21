@@ -11,7 +11,7 @@ let song_idx = 0;
 let songs = [
 	{ 'src': './static/songs/alone.mp3', 'name': 'Alone', 'title': 'Marshmello - Alone' },
 	{ 'src': './static/songs/summer.mp3', 'name': 'Summer', 'title': 'Marshmello - Summer' },
-	{ 'src': './static/songs/The Spectre.mp3', 'name': 'The Spectre', 'title': 'Alan Walker - The Spectre' },
+	{ 'src': './static/songs/Syn_Cole.mp3', 'name': 'Syn_Cole', 'title': 'Syn Cole - Feel Good' },
 ];
 let imageUrl = "/static/images/collage/";
 let images = ["github.jpg", "MCP.jpg", "github2.jpg", "teracloud.jpg"];
@@ -167,14 +167,15 @@ function scrollDiv(direction) {
 
 let projects = [
 	{
-		'title': 'High Frequency Trading System',
-		'subtitle': 'System Design | C++',
-		'desp': 'A low-latency trading system designed for high-frequency markets. Implemented using modern C++ features for optimal performance.',
+		'title': 'File Vault',
+		'subtitle': 'Full Stack | React | Django | Docker',
+		'desp': 'A production-ready, full-stack file management system focused on security, storage efficiency, and performance. Implements content-based file deduplication using hashing, supports large file uploads with chunked processing, provides real-time storage analytics, and features a premium dark/light UI. Fully containerized with Docker and deployed with a scalable frontend-backend architecture.',
 		'icon': '',
-		'technologies': ['cpp', 'linux', 'github'],
-		'github': 'https://github.com/viren849/hft_system',
-		'deploy': ''
-	}, {
+		'technologies': ['react', 'typescript', 'django', 'docker', 'postgresql', 'github'],
+		'github': 'https://github.com/viren849/file-vault',
+		'deploy': 'https://file-vault-sandy.vercel.app/'
+	}
+	, {
 		'title': 'Visual LLM Pipeline Builder',
 		'subtitle': 'React Flow | FastAPI | Pydantic',
 		'desp': 'A visual, node-based pipeline editor for designing and validating LLM workflows. Supports drag-and-drop nodes, dynamic variable parsing with auto-generated connection handles, and backend DAG validation using Kahn’s Algorithm.',
@@ -227,7 +228,7 @@ let projects = [
 		'subtitle': 'Web | Game AI',
 		'desp': 'A modern, responsive Tic Tac Toe game featuring 2-player mode and AI opponents with Easy, Medium, and Hard difficulties. The Hard mode uses an optimized Minimax algorithm with alpha-beta pruning to provide an unbeatable AI. Built with a polished UI, smooth animations, and deployed live on GitHub Pages.',
 		'icon': '',
-		'technologies': ['html', 'css', 'js', 'android', 'github'],
+		'technologies': ['html', 'css', 'js', 'github'],
 		'github': '',
 		'deploy': 'https://viren849.github.io/tic-tac-toe-ai/'
 	}, {
@@ -353,6 +354,104 @@ function preloadCollageImages(i) {
 
 preloadCollageImages(0);
 
+// Custom Cursor Logic
+const cursor = document.querySelector('.cursor');
+const cursorDot = document.querySelector('.cursor-dot');
 
+document.addEventListener('mousemove', (e) => {
+	const posX = e.clientX;
+	const posY = e.clientY;
 
+	// Update cursor dot immediately for snappy feel
+	cursorDot.style.left = `${posX}px`;
+	cursorDot.style.top = `${posY}px`;
 
+	// Animate main cursor with slight delay
+	cursor.animate({
+		left: `${posX}px`,
+		top: `${posY}px`
+	}, { duration: 500, fill: "forwards" });
+});
+
+// Expand cursor on interactive elements
+const interactables = 'a, .btn, .hex-cell, .contact-card, .list p, .project-content';
+document.querySelectorAll(interactables).forEach(el => {
+	el.addEventListener('mouseenter', () => cursor.classList.add('expand'));
+	el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
+});
+
+// Theme Logic
+function toggleTheme() {
+	document.body.classList.toggle('light-theme');
+	const isLight = document.body.classList.contains('light-theme');
+	localStorage.setItem('theme', isLight ? 'light' : 'dark');
+}
+
+// Initialize theme
+if (localStorage.getItem('theme') === 'light') {
+	document.body.classList.add('light-theme');
+}
+
+// Terminal Command Logic
+const terminalInput = document.getElementById('terminal-input');
+const terminalOutput = document.getElementById('terminal-output');
+const terminalBody = document.getElementById('terminal-body');
+
+if (terminalInput) {
+	terminalInput.addEventListener('keydown', (e) => {
+		if (e.key === 'Enter') {
+			const command = terminalInput.value.trim().toLowerCase();
+			processCommand(command);
+			terminalInput.value = '';
+		}
+	});
+
+	// Auto-focus input on terminal click
+	terminalBody.addEventListener('click', () => terminalInput.focus());
+}
+
+function processCommand(cmd) {
+	if (!cmd) return;
+
+	// Echo command
+	const echo = document.createElement('div');
+	echo.innerHTML = `<span class="terminal-prompt">viren@portfolio:~$</span> ${cmd}`;
+	terminalOutput.appendChild(echo);
+
+	const response = document.createElement('div');
+	response.style.marginBottom = "10px";
+
+	switch (cmd) {
+		case 'help':
+			response.innerHTML = `Available commands: <br>
+                - <span style="color: var(--accent-color)">projects</span>: List all portfolio projects<br>
+                - <span style="color: var(--accent-color)">whoami</span>: About me<br>
+                - <span style="color: var(--accent-color)">socials</span>: Social links<br>
+                - <span style="color: var(--accent-color)">clear</span>: Clear terminal<br>
+                - <span style="color: var(--accent-color)">theme</span>: Toggle Light/Dark mode`;
+			break;
+		case 'projects':
+			let pList = projects.map(p => `- ${p.title} (${p.subtitle})`).join('<br>');
+			response.innerHTML = `My Projects:<br>${pList}`;
+			break;
+		case 'whoami':
+			response.innerHTML = `I'm Virender Kumar, a Software Engineer passionate about automation, DevOps, and clean code. I love building things that scale.`;
+			break;
+		case 'socials':
+			response.innerHTML = `GitHub: <a href="https://github.com/viren849" target="_blank" style="color: var(--accent-color)">viren849</a><br>
+                LinkedIn: <a href="https://linkedin.com/in/kumar-viren" target="_blank" style="color: var(--accent-color)">kumar-viren</a>`;
+			break;
+		case 'clear':
+			terminalOutput.innerHTML = '';
+			return;
+		case 'theme':
+			toggleTheme();
+			response.innerHTML = `Theme toggled!`;
+			break;
+		default:
+			response.innerHTML = `Command not found: ${cmd}. Type 'help' for assistance.`;
+	}
+
+	terminalOutput.appendChild(response);
+	terminalBody.scrollTop = terminalBody.scrollHeight;
+}
