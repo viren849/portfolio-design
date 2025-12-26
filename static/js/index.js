@@ -166,6 +166,28 @@ function scrollDiv(direction) {
 
 
 let projects = [
+
+	{
+		'title': 'Developer Coding Agent (MCP)',
+		'subtitle': 'AI Agent | MCP | Semantic Code Search',
+		'desp': 'A modular, project-aware AI coding agent that indexes entire codebases and enables semantic code search, contextual Q&A, and persistent memory. Exposed via the Model Context Protocol (MCP), allowing external AI tools (VS Code, Claude Desktop, Flowise) to query real project context without direct filesystem access. Supports both standalone CLI usage with multi-LLM orchestration and MCP-based context provisioning.',
+		'icon': '',
+		'technologies': ['python', 'fastapi', 'github'],
+		'github': 'https://github.com/viren849/Coding-agent',
+		'deploy': ''
+	},
+
+	{
+		title: 'Network-Centric Real-Time Market Data Server',
+		subtitle: 'distributed-systems | Protobuf | low-latency',
+		desp: 'A high-performance, network-centric market data ingestion platform designed to simulate real-world trading infrastructure. The system ingests raw TCP tick streams in C++, applies canonical data modeling using Protocol Buffers, enforces validation and normalization, and forwards data internally via long-lived gRPC streaming to downstream services. Built with strict separation between transport, serialization, and business logic, the platform measures serialization latency, handles malformed data safely, and enables cross-language service communication (C++ → Java) for aggregation and analytics.',
+		icon: '',
+		technologies: ['cpp', 'java', 'networking', 'github'],
+		github: 'https://github.com/viren849/market-data-server',
+		deploy: ''
+	}
+
+	,
 	{
 		'title': 'File Vault',
 		'subtitle': 'Full Stack | React | Django | Docker',
