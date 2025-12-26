@@ -182,7 +182,7 @@ let projects = [
 		subtitle: 'distributed-systems | Protobuf | low-latency',
 		desp: 'A high-performance, network-centric market data ingestion platform designed to simulate real-world trading infrastructure. The system ingests raw TCP tick streams in C++, applies canonical data modeling using Protocol Buffers, enforces validation and normalization, and forwards data internally via long-lived gRPC streaming to downstream services. Built with strict separation between transport, serialization, and business logic, the platform measures serialization latency, handles malformed data safely, and enables cross-language service communication (C++ → Java) for aggregation and analytics.',
 		icon: '',
-		technologies: ['cpp', 'java', 'networking', 'github'],
+		technologies: ['cpp', 'java', 'jenkins' ,'networking', 'github'],
 		github: 'https://github.com/viren849/market-data-server',
 		deploy: ''
 	}
