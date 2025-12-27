@@ -120,10 +120,15 @@ function setSong(idx) {
 
 function play() {
 	document.getElementById('playButton').classList.toggle('pause');
-	if (!audio.paused)
+	const visualizer = document.getElementById('visualizer');
+	if (!audio.paused) {
 		audio.pause();
-	else
+		if (visualizer) visualizer.classList.remove('playing');
+	}
+	else {
 		audio.play();
+		if (visualizer) visualizer.classList.add('playing');
+	}
 }
 
 audio.onended = function () {
@@ -283,6 +288,32 @@ function getProjects(skill) {
 	}
 
 	projectContainer.appendChild(row);
+	init3DTilt();
+	observeNewElements();
+}
+
+// 3D Tilt Effect Logic
+function init3DTilt() {
+	const cards = document.querySelectorAll('.project-content');
+	cards.forEach(card => {
+		card.onmousemove = (e) => {
+			const rect = card.getBoundingClientRect();
+			const x = e.clientX - rect.left;
+			const y = e.clientY - rect.top;
+
+			const centerX = rect.width / 2;
+			const centerY = rect.height / 2;
+
+			const rotateX = (y - centerY) / 8; // Adjust sensitivity
+			const rotateY = (centerX - x) / 8;
+
+			card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+		};
+
+		card.onmouseleave = () => {
+			card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+		};
+	});
 }
 
 function getProjectCard(project) {
@@ -381,37 +412,70 @@ const cursor = document.querySelector('.cursor');
 const cursorDot = document.querySelector('.cursor-dot');
 
 document.addEventListener('mousemove', (e) => {
-	const posX = e.clientX;
-	const posY = e.clientY;
-
-	// Update cursor dot immediately for snappy feel
-	cursorDot.style.left = `${posX}px`;
-	cursorDot.style.top = `${posY}px`;
-
-	// Animate main cursor with slight delay
-	cursor.animate({
-		left: `${posX}px`,
-		top: `${posY}px`
-	}, { duration: 500, fill: "forwards" });
+	cursor.style.left = e.clientX + 'px';
+	cursor.style.top = e.clientY + 'px';
+	cursorDot.style.left = e.clientX + 'px';
+	cursorDot.style.top = e.clientY + 'px';
 });
 
-// Expand cursor on interactive elements
-const interactables = 'a, .btn, .hex-cell, .contact-card, .list p, .project-content';
-document.querySelectorAll(interactables).forEach(el => {
-	el.addEventListener('mouseenter', () => cursor.classList.add('expand'));
-	el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
-});
+// Context-Aware Cursor Logic
+const updateCursor = (className, action = 'add') => {
+	if (action === 'add') cursor.classList.add(className);
+	else cursor.classList.remove(className);
+};
+
+const setupCursorEvents = () => {
+	// Standard Expand
+	const hoverables = 'a, button, .tab, .hex-cell, .theme-toggle';
+	document.querySelectorAll(hoverables).forEach(el => {
+		el.addEventListener('mouseenter', () => updateCursor('expand'));
+		el.addEventListener('mouseleave', () => updateCursor('expand', 'remove'));
+	});
+
+	// Social Items
+	const socials = '.contact-card, .source[href*="github"], .source[href*="linkedin"]';
+	document.querySelectorAll(socials).forEach(el => {
+		el.addEventListener('mouseenter', () => updateCursor('cursor-social'));
+		el.addEventListener('mouseleave', () => updateCursor('cursor-social', 'remove'));
+	});
+
+	// Project Items
+	const projects = '.project-content, .source';
+	document.querySelectorAll(projects).forEach(el => {
+		el.addEventListener('mouseenter', () => updateCursor('cursor-project'));
+		el.addEventListener('mouseleave', () => updateCursor('cursor-project', 'remove'));
+	});
+};
+
+setupCursorEvents();
 
 // Theme Logic
 function toggleTheme() {
 	document.body.classList.toggle('light-theme');
 	const isLight = document.body.classList.contains('light-theme');
 	localStorage.setItem('theme', isLight ? 'light' : 'dark');
+	updateThemeIcon();
 }
 
 // Initialize theme
-if (localStorage.getItem('theme') === 'light') {
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'light') {
 	document.body.classList.add('light-theme');
+} else {
+	document.body.classList.remove('light-theme'); // Ensure dark is default
+	localStorage.setItem('theme', 'dark');
+}
+
+// Sync theme icon on load
+const themeIcon = document.getElementById('theme-icon');
+if (themeIcon) {
+	themeIcon.innerText = document.body.classList.contains('light-theme') ? '☀️' : '🌙';
+}
+
+function updateThemeIcon() {
+	if (themeIcon) {
+		themeIcon.innerText = document.body.classList.contains('light-theme') ? '☀️' : '🌙';
+	}
 }
 
 // Terminal Command Logic
@@ -419,12 +483,34 @@ const terminalInput = document.getElementById('terminal-input');
 const terminalOutput = document.getElementById('terminal-output');
 const terminalBody = document.getElementById('terminal-body');
 
+let commandHistory = [];
+let historyIndex = -1;
+
 if (terminalInput) {
 	terminalInput.addEventListener('keydown', (e) => {
 		if (e.key === 'Enter') {
-			const command = terminalInput.value.trim().toLowerCase();
-			processCommand(command);
+			const command = terminalInput.value.trim();
+			if (command) {
+				commandHistory.unshift(command);
+				historyIndex = -1;
+			}
+			processCommand(command.toLowerCase());
 			terminalInput.value = '';
+		} else if (e.key === 'ArrowUp') {
+			e.preventDefault();
+			if (historyIndex < commandHistory.length - 1) {
+				historyIndex++;
+				terminalInput.value = commandHistory[historyIndex];
+			}
+		} else if (e.key === 'ArrowDown') {
+			e.preventDefault();
+			if (historyIndex > 0) {
+				historyIndex--;
+				terminalInput.value = commandHistory[historyIndex];
+			} else {
+				historyIndex = -1;
+				terminalInput.value = '';
+			}
 		}
 	});
 
@@ -443,14 +529,59 @@ function processCommand(cmd) {
 	const response = document.createElement('div');
 	response.style.marginBottom = "10px";
 
-	switch (cmd) {
+	const args = cmd.split(' ');
+	const mainCmd = args[0];
+
+	switch (mainCmd) {
 		case 'help':
 			response.innerHTML = `Available commands: <br>
                 - <span style="color: var(--accent-color)">projects</span>: List all portfolio projects<br>
                 - <span style="color: var(--accent-color)">whoami</span>: About me<br>
+                - <span style="color: var(--accent-color)">ls</span>: List sections<br>
+                - <span style="color: var(--accent-color)">cat [section]</span>: View section details<br>
+                - <span style="color: var(--accent-color)">gui [section]</span>: Navigate to section<br>
                 - <span style="color: var(--accent-color)">socials</span>: Social links<br>
+                - <span style="color: var(--accent-color)">date</span>: System date<br>
                 - <span style="color: var(--accent-color)">clear</span>: Clear terminal<br>
                 - <span style="color: var(--accent-color)">theme</span>: Toggle Light/Dark mode`;
+			break;
+		case 'ls':
+			response.innerHTML = `about  projects  skills  reach-out  terminal`;
+			break;
+		case 'cat':
+			const section = args[1];
+			if (!section) {
+				response.innerHTML = `usage: cat [section]`;
+			} else if (['about', 'projects', 'skills', 'reach-out', 'terminal'].includes(section)) {
+				if (section === 'about') response.innerHTML = `Virender Kumar - Software Developer with focus on systems and backend.`;
+				else if (section === 'projects') response.innerHTML = `Total projects: ${projects.length}. Type 'projects' for list.`;
+				else response.innerHTML = `Details for ${section} available in the GUI.`;
+			} else {
+				response.innerHTML = `cat: ${section}: No such section`;
+			}
+			break;
+		case 'gui':
+			const target = args[1];
+			if (!target) {
+				response.innerHTML = `usage: gui [about|projects|reach-out|terminal]`;
+			} else if (['about', 'projects', 'reach-out', 'terminal'].includes(target)) {
+				const tabMap = {
+					'about': 0,
+					'projects': 1,
+					'reach-out': 2,
+					'terminal': 3
+				};
+				const tabs = document.querySelectorAll('.tab');
+				if (tabs[tabMap[target]]) {
+					tabs[tabMap[target]].click();
+					response.innerHTML = `Navigating to ${target}...`;
+				}
+			} else {
+				response.innerHTML = `gui: ${target}: Invalid section`;
+			}
+			break;
+		case 'date':
+			response.innerHTML = new Date().toString();
 			break;
 		case 'projects':
 			let pList = projects.map(p => `- ${p.title} (${p.subtitle})`).join('<br>');
@@ -523,23 +654,39 @@ if (contactForm) {
 		}
 
 		if (isValid) {
+			const submitBtn = contactForm.querySelector('.form-submit-btn');
+			const originalBtnHtml = submitBtn.innerHTML;
+
+			// Show sending state
+			submitBtn.disabled = true;
+			submitBtn.innerHTML = `
+				<svg class="spinner" width="20" height="20" viewBox="0 0 50 50" style="vertical-align: middle; margin-right: 8px;">
+					<circle cx="25" cy="25" r="20" fill="none" stroke="currentColor" stroke-width="5"></circle>
+				</svg>
+				Sending...
+			`;
+
 			// Create Gmail compose link
 			const subject = encodeURIComponent('Portfolio Contact Form Submission');
 			const body = encodeURIComponent(`From: ${email}\n\nMessage:\n${message}`);
 			const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=virender41963749@gmail.com&su=${subject}&body=${body}`;
 
-			// Open Gmail in a new tab
-			window.open(gmailLink, '_blank');
-
-			// Show success message
-			formStatus.className = 'form-status success';
-			formStatus.textContent = '✓ Opening Gmail... Please send the message to complete your submission.';
-
-			// Reset form after a delay
+			// Open Gmail after a tiny delay to show the sending state
 			setTimeout(() => {
-				contactForm.reset();
-				formStatus.style.display = 'none';
-			}, 5000);
+				window.open(gmailLink, '_blank');
+
+				// Show success message
+				formStatus.className = 'form-status success';
+				formStatus.textContent = '✓ Opening Gmail... Please send the message to complete your submission.';
+
+				// Reset button after success
+				setTimeout(() => {
+					submitBtn.disabled = false;
+					submitBtn.innerHTML = originalBtnHtml;
+					contactForm.reset();
+					formStatus.style.display = 'none';
+				}, 5000);
+			}, 800);
 		} else {
 			// Show error message
 			formStatus.className = 'form-status error';
@@ -555,3 +702,54 @@ if (contactForm) {
 	});
 }
 
+// Intersection Observer for Reveal Animations
+const revealOptions = {
+	threshold: 0.15,
+	rootMargin: "0px 0px -50px 0px"
+};
+
+const revealObserver = new IntersectionObserver((entries) => {
+	entries.forEach(entry => {
+		if (entry.isIntersecting) {
+			entry.target.classList.add('revealed');
+		}
+	});
+}, revealOptions);
+
+// Subtle Parallax Background Effect
+const initParallax = () => {
+	document.addEventListener('mousemove', (e) => {
+		const backgrounds = document.querySelectorAll('.background');
+		const x = (window.innerWidth - e.pageX * 2) / 100;
+		const y = (window.innerHeight - e.pageY * 2) / 100;
+
+		backgrounds.forEach(bg => {
+			bg.style.transform = `translateX(${x}px) translateY(${y}px)`;
+		});
+	});
+};
+
+function staggerHexagons() {
+	const hexagons = document.querySelectorAll('.hex-cell');
+	hexagons.forEach((hex, index) => {
+		hex.classList.add('reveal');
+		hex.style.transitionDelay = `${index * 0.05}s`;
+		revealObserver.observe(hex);
+	});
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+	const revealElements = document.querySelectorAll('.reveal');
+	revealElements.forEach(el => revealObserver.observe(el));
+	staggerHexagons();
+	initParallax();
+});
+
+// For dynamic content if any
+function observeNewElements() {
+	const newElements = document.querySelectorAll('.project-content:not(.revealed)');
+	newElements.forEach(el => {
+		el.classList.add('reveal');
+		revealObserver.observe(el);
+	});
+}

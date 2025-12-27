@@ -158,6 +158,13 @@
 				</div>
 			</div>
 			<div class="round">
+				<div id="visualizer" class="visualizer">
+					<div class="bar"></div>
+					<div class="bar"></div>
+					<div class="bar"></div>
+					<div class="bar"></div>
+					<div class="bar"></div>
+				</div>
 				<button class="play" onclick="play()" id="playButton"></button>
 			</div>
 		</div>
@@ -168,10 +175,10 @@
 			<section id="about" class="hide">
 				<h3 class="hide">This is about section where you can find information about me.</h3>
 				<div class="row">
-					<div class="column">
+					<div class="column reveal">
 						<div class="content long img-content">
-							<img src="/static/images/collage/Pic1.jpg" alt="virenderkumar" class="collage-img fade"
-								style="object-position: top;">
+							<img src="static/images/collage/Pic1.jpg" alt="virenderkumar" class="collage-img fade"
+								style="object-position: top;" loading="lazy">
 						</div>
 
 						<div class="content long">
@@ -179,7 +186,7 @@
 							<p class="card-text card-subtitle">Software Developer</p>
 							<p>A software developer with robust problem-solving skills and proven experience in creating
 								softwares.</p>
-							<a href="/static/files/resume.pdf" target="_blank" class="btn"><svg width="16" height="16"
+							<a href="static/files/resume.pdf" target="_blank" class="btn"><svg width="16" height="16"
 									viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 									stroke-linecap="round" stroke-linejoin="round"
 									style="vertical-align: middle; margin-right: 6px;">
@@ -189,13 +196,14 @@
 								</svg>View Resume</a>
 						</div>
 					</div>
-					<div class="column">
+					<div class="column reveal reveal-late">
 						<div class="content short">
 							<p class="card-text card-title">B.Tech - C.S.E</p>
 							<p class="card-text card-subtitle">GEHU | DEHRADUN</p>
 						</div>
 						<div class="content long img-content">
-							<img id="about-collage-image1" src="." alt="clicked images 1" class="collage-img fade">
+							<img id="about-collage-image1" src="." alt="clicked images 1" class="collage-img fade"
+								loading="lazy">
 						</div>
 						<div class="content medium">
 							<p class="card-text card-title">Backend & Systems Focus</p>
@@ -204,9 +212,10 @@
 							<!-- <a href="/static/files/resume.pdf" target="_blank" class="btn">View Resume</a> -->
 						</div>
 					</div>
-					<div class="column">
+					<div class="column reveal reveal-very-late">
 						<div class="content long img-content">
-							<img id="about-collage-image2" src="." alt="clicked images 2" class="collage-img fade">
+							<img id="about-collage-image2" src="." alt="clicked images 2" class="collage-img fade"
+								loading="lazy">
 						</div>
 						<div class="content short">
 							<p class="card-text card-title">Software Engineer II</p>
@@ -221,7 +230,7 @@
 							<p>Developed distributed backup services and network clients.</p>
 						</div>
 					</div>
-					<div class="column">
+					<div class="column reveal">
 						<!-- <div class="content short">
 							<p class="card-text" id="age" style="text-align: center;"></p>
 						</div> -->
@@ -232,8 +241,8 @@
 							<p>Automated CI CD pipelines and cloud infrastructure workflows.</p>
 						</div>
 						<div class="content long img-content">
-							<img src="/static/images/collage/pic6.jpg" alt="mirror rubik's cube"
-								class="collage-img fade">
+							<img src="static/images/collage/pic6.jpg" alt="mirror rubik's cube" class="collage-img fade"
+								loading="lazy">
 						</div>
 					</div>
 				</div>
@@ -242,20 +251,20 @@
 			<section class="hide" id="projects">
 				<h3 class="hide">This is about section where you can find information about my Projects.</h3>
 				<div class="background"></div>
-				<div class="skills-container">
+				<div class="skills-container reveal">
 					<!-- Row 1: 2 skills -->
 					<div class="hex-row m1">
 						<div class="hex-cell" onclick="getProjects('java'); scrollToView('project-cards');">
 							<div class="cell-top"></div>
 							<div class="cell">
-								<img src="/static/images/projects/java.svg" alt="java" class="skill">
+								<img src="static/images/projects/java.svg" alt="java" class="skill">
 							</div>
 							<div class="cell-bottom"></div>
 						</div>
 						<div class="hex-cell" onclick="getProjects('python'); scrollToView('project-cards');">
 							<div class="cell-top"></div>
 							<div class="cell">
-								<img src="/static/images/projects/python.svg" alt="python" class="skill"
+								<img src="static/images/projects/python.svg" alt="python" class="skill"
 									style="top: 0px;">
 							</div>
 							<div class="cell-bottom"></div>
@@ -267,7 +276,7 @@
 						<div class="hex-cell" onclick="getProjects('cpp'); scrollToView('project-cards');">
 							<div class="cell-top" style="border-bottom-color: #03599C;"></div>
 							<div class="cell" style="background-color: #03599C;">
-								<img src="/static/images/projects/cpp.svg" alt="cpp" class="skill" style="top: -5px;">
+								<img src="static/images/projects/cpp.svg" alt="cpp" class="skill" style="top: -5px;">
 							</div>
 							<div class="cell-bottom" style="border-top-color: #03599C;"></div>
 						</div>
@@ -306,14 +315,14 @@
 						<div class="hex-cell" onclick="getProjects('aws'); scrollToView('project-cards');">
 							<div class="cell-top"></div>
 							<div class="cell">
-								<img src="/static/images/projects/aws.svg" alt="aws" class="skill large">
+								<img src="static/images/projects/aws.svg" alt="aws" class="skill large">
 							</div>
 							<div class="cell-bottom"></div>
 						</div>
 						<div class="hex-cell" onclick="getProjects('react'); scrollToView('project-cards');">
 							<div class="cell-top" style="border-bottom-color: #61DAFB;"></div>
 							<div class="cell" style="background-color: #61DAFB;">
-								<img src="/static/images/projects/react.svg" alt="react" class="skill"
+								<img src="static/images/projects/react.svg" alt="react" class="skill"
 									style="top: 0px; width: 45px;">
 							</div>
 							<div class="cell-bottom" style="border-top-color: #61DAFB;"></div>
@@ -325,14 +334,14 @@
 						<div class="hex-cell" onclick="getProjects('github'); scrollToView('project-cards');">
 							<div class="cell-top"></div>
 							<div class="cell">
-								<img src="/static/images/projects/github.svg" alt="github" class="skill">
+								<img src="static/images/projects/github.svg" alt="github" class="skill">
 							</div>
 							<div class="cell-bottom"></div>
 						</div>
 						<div class="hex-cell" onclick="getProjects('mongodb'); scrollToView('project-cards');">
 							<div class="cell-top"></div>
 							<div class="cell">
-								<img src="/static/images/projects/mongodb.svg" alt="mongodb" class="skill">
+								<img src="static/images/projects/mongodb.svg" alt="mongodb" class="skill">
 							</div>
 							<div class="cell-bottom"></div>
 						</div>
@@ -346,14 +355,14 @@
 						<div class="hex-cell" onclick="getProjects('postgressql'); scrollToView('project-cards');">
 							<div class="cell-top"></div>
 							<div class="cell">
-								<img src="/static/images/projects/postgresql.svg" alt="postgressql" class="skill">
+								<img src="static/images/projects/postgresql.svg" alt="postgressql" class="skill">
 							</div>
 							<div class="cell-bottom"></div>
 						</div>
 						<div class="hex-cell" onclick="getProjects('bash'); scrollToView('project-cards');">
 							<div class="cell-top"></div>
 							<div class="cell">
-								<img src="/static/images/projects/bash.svg" alt="bash" class="skill">
+								<img src="static/images/projects/bash.svg" alt="bash" class="skill">
 							</div>
 							<div class="cell-bottom"></div>
 						</div>
@@ -364,28 +373,28 @@
 						<div class="hex-cell" onclick="getProjects('nodejs'); scrollToView('project-cards');">
 							<div class="cell-top"></div>
 							<div class="cell">
-								<img src="/static/images/projects/nodejs.svg" alt="nodejs" class="skill large">
+								<img src="static/images/projects/nodejs.svg" alt="nodejs" class="skill large">
 							</div>
 							<div class="cell-bottom"></div>
 						</div>
 						<div class="hex-cell" onclick="getProjects('mysql'); scrollToView('project-cards');">
 							<div class="cell-top"></div>
 							<div class="cell">
-								<img src="/static/images/projects/mysql.svg" alt="sql" class="skill">
+								<img src="static/images/projects/mysql.svg" alt="sql" class="skill">
 							</div>
 							<div class="cell-bottom"></div>
 						</div>
 						<div class="hex-cell" onclick="getProjects('blockchain'); scrollToView('project-cards');">
 							<div class="cell-top"></div>
 							<div class="cell">
-								<img src="/static/images/projects/blockchain.svg" alt="blockchain" class="skill">
+								<img src="static/images/projects/blockchain.svg" alt="blockchain" class="skill">
 							</div>
 							<div class="cell-bottom"></div>
 						</div>
 						<div class="hex-cell" onclick="getProjects('fastapi'); scrollToView('project-cards');">
 							<div class="cell-top"></div>
 							<div class="cell">
-								<img src="/static/images/projects/fastapi.svg" alt="fastapi" class="skill">
+								<img src="static/images/projects/fastapi.svg" alt="fastapi" class="skill">
 							</div>
 							<div class="cell-bottom"></div>
 						</div>
@@ -396,21 +405,21 @@
 						<div class="hex-cell" onclick="getProjects('solidity'); scrollToView('project-cards');">
 							<div class="cell-top"></div>
 							<div class="cell">
-								<img src="/static/images/projects/solidity.svg" alt="solidity" class="skill">
+								<img src="static/images/projects/solidity.svg" alt="solidity" class="skill">
 							</div>
 							<div class="cell-bottom"></div>
 						</div>
 						<div class="hex-cell" onclick="getProjects('jenkins'); scrollToView('project-cards');">
 							<div class="cell-top"></div>
 							<div class="cell">
-								<img src="/static/images/projects/jenkins.svg" alt="jenkins" class="skill">
+								<img src="static/images/projects/jenkins.svg" alt="jenkins" class="skill">
 							</div>
 							<div class="cell-bottom"></div>
 						</div>
 						<div class="hex-cell" onclick="getProjects('docker'); scrollToView('project-cards');">
 							<div class="cell-top"></div>
 							<div class="cell">
-								<img src="/static/images/projects/docker.svg" alt="docker" class="skill"
+								<img src="static/images/projects/docker.svg" alt="docker" class="skill"
 									style="top: 0px;">
 							</div>
 							<div class="cell-bottom"></div>
@@ -423,7 +432,7 @@
 
 			<section class="hide" id="terminal">
 				<div class="background"></div>
-				<div class="terminal-container">
+				<div class="terminal-container reveal">
 					<div class="terminal-header">
 						<div class="terminal-buttons">
 							<span class="t-btn red"></span>
@@ -449,7 +458,7 @@
 				<div class="wrapper" style="flex-direction: column;">
 					<div class="background"></div>
 					<!-- Contact Form -->
-					<div class="row">
+					<div class="row reveal">
 						<div class="contact-form-container">
 							<h2 class="form-title">Get In Touch</h2>
 							<p class="form-subtitle">Have a question or want to work together? Drop me a message!</p>
@@ -485,7 +494,7 @@
 					</div>
 
 					<!-- Social Media Links -->
-					<div class="row social-media-row">
+					<div class="row social-media-row reveal">
 						<div class="contact-card-container">
 							<a class="contact-card" href="https://www.github.com/viren849" target="_blank">
 								<img src="static/images/projects/github.svg" alt="github" class="contact">
@@ -518,11 +527,7 @@
 					</div>
 					<div class="row">
 						<a class="source" href="https://github.com/viren849/portfolio-design" target="_blank">
-							<svg viewBox="0 0 16 16" version="1.1" aria-hidden="true">
-								<path fill-rule="evenodd" fill="#FFFFFF"
-									d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
-								</path>
-							</svg>
+							<img src="static/images/projects/github.svg" class="github">
 							Source on Github
 						</a>
 					</div>
@@ -534,7 +539,7 @@
 	<section class="init">
 		<h3 class="hide">Downloading necessary Images and loading css.</h3>
 		<div id="load_gif">
-			<img src="/static/images/other/preloader.gif" alt="loading" class="center">
+			<img src="static/images/other/preloader.gif" alt="loading" class="center">
 			<div class="centered">Loading... This might take a while.</div>
 		</div>
 		<svg class="hello hide" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
