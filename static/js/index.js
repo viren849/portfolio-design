@@ -523,23 +523,22 @@ if (contactForm) {
 		}
 
 		if (isValid) {
-			// Create mailto link
+			// Create Gmail compose link
 			const subject = encodeURIComponent('Portfolio Contact Form Submission');
 			const body = encodeURIComponent(`From: ${email}\n\nMessage:\n${message}`);
-			const mailtoLink = `mailto:virender41963749@gmail.com?subject=${subject}&body=${body}`;
+			const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=virender41963749@gmail.com&su=${subject}&body=${body}`;
 
-			// Open email client
-			window.location.href = mailtoLink;
+			// Open Gmail in a new tab
+			window.open(gmailLink, '_blank');
 
 			// Show success message
 			formStatus.className = 'form-status success';
-			formStatus.textContent = '✓ Opening your email client... Please send the message to complete your submission.';
+			formStatus.textContent = '✓ Opening Gmail... Please send the message to complete your submission.';
 
 			// Reset form after a delay
 			setTimeout(() => {
 				contactForm.reset();
-				formStatus.className = 'form-status';
-				formStatus.textContent = '';
+				formStatus.style.display = 'none';
 			}, 5000);
 		} else {
 			// Show error message
