@@ -448,7 +448,44 @@
 				<h3 class="hide">This is about section where you can find informationon how to reach out to me.</h3>
 				<div class="wrapper" style="flex-direction: column;">
 					<div class="background"></div>
+					<!-- Contact Form -->
 					<div class="row">
+						<div class="contact-form-container">
+							<h2 class="form-title">Get In Touch</h2>
+							<p class="form-subtitle">Have a question or want to work together? Drop me a message!</p>
+
+							<form id="contact-form" class="contact-form">
+								<div class="form-group">
+									<label for="contact-email">Email Address</label>
+									<input type="email" id="contact-email" name="email"
+										placeholder="your.email@example.com" required autocomplete="email">
+									<span class="error-message" id="email-error"></span>
+								</div>
+
+								<div class="form-group">
+									<label for="contact-message">Message</label>
+									<textarea id="contact-message" name="message"
+										placeholder="Write your message here..." rows="6" required></textarea>
+									<span class="error-message" id="message-error"></span>
+								</div>
+
+								<button type="submit" class="form-submit-btn">
+									<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+										stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+										style="vertical-align: middle; margin-right: 8px;">
+										<line x1="22" y1="2" x2="11" y2="13"></line>
+										<polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+									</svg>
+									Send Message
+								</button>
+
+								<div class="form-status" id="form-status"></div>
+							</form>
+						</div>
+					</div>
+
+					<!-- Social Media Links -->
+					<div class="row social-media-row">
 						<div class="contact-card-container">
 							<a class="contact-card" href="https://www.github.com/viren849" target="_blank">
 								<img src="static/images/projects/github.svg" alt="github" class="contact">
@@ -474,6 +511,8 @@
 							<span>repeat<span style="color: #C51057;">()</span>;</span>
 						</div>
 					</div>
+
+
 					<div class="row centered" style="color: var(--text-color);">
 						<p>Developer: Virender Kumar</p>
 					</div>

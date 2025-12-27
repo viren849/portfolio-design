@@ -182,7 +182,7 @@ let projects = [
 		subtitle: 'distributed-systems | Protobuf | low-latency',
 		desp: 'A high-performance, network-centric market data ingestion platform designed to simulate real-world trading infrastructure. The system ingests raw TCP tick streams in C++, applies canonical data modeling using Protocol Buffers, enforces validation and normalization, and forwards data internally via long-lived gRPC streaming to downstream services. Built with strict separation between transport, serialization, and business logic, the platform measures serialization latency, handles malformed data safely, and enables cross-language service communication (C++ → Java) for aggregation and analytics.',
 		icon: '',
-		technologies: ['cpp', 'java', 'jenkins' ,'networking', 'github'],
+		technologies: ['cpp', 'java', 'jenkins', 'networking', 'github'],
 		github: 'https://github.com/viren849/market-data-server',
 		deploy: ''
 	}
@@ -477,3 +477,82 @@ function processCommand(cmd) {
 	terminalOutput.appendChild(response);
 	terminalBody.scrollTop = terminalBody.scrollHeight;
 }
+
+// Contact Form Logic
+const contactForm = document.getElementById('contact-form');
+const emailInput = document.getElementById('contact-email');
+const messageInput = document.getElementById('contact-message');
+const emailError = document.getElementById('email-error');
+const messageError = document.getElementById('message-error');
+const formStatus = document.getElementById('form-status');
+
+if (contactForm) {
+	contactForm.addEventListener('submit', (e) => {
+		e.preventDefault();
+
+		// Clear previous errors
+		emailError.textContent = '';
+		messageError.textContent = '';
+		formStatus.className = 'form-status';
+		formStatus.textContent = '';
+
+		// Get form values
+		const email = emailInput.value.trim();
+		const message = messageInput.value.trim();
+
+		// Validation
+		let isValid = true;
+
+		// Email validation
+		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		if (!email) {
+			emailError.textContent = 'Email is required';
+			isValid = false;
+		} else if (!emailRegex.test(email)) {
+			emailError.textContent = 'Please enter a valid email address';
+			isValid = false;
+		}
+
+		// Message validation
+		if (!message) {
+			messageError.textContent = 'Message is required';
+			isValid = false;
+		} else if (message.length < 10) {
+			messageError.textContent = 'Message must be at least 10 characters';
+			isValid = false;
+		}
+
+		if (isValid) {
+			// Create mailto link
+			const subject = encodeURIComponent('Portfolio Contact Form Submission');
+			const body = encodeURIComponent(`From: ${email}\n\nMessage:\n${message}`);
+			const mailtoLink = `mailto:virender41963749@gmail.com?subject=${subject}&body=${body}`;
+
+			// Open email client
+			window.location.href = mailtoLink;
+
+			// Show success message
+			formStatus.className = 'form-status success';
+			formStatus.textContent = '✓ Opening your email client... Please send the message to complete your submission.';
+
+			// Reset form after a delay
+			setTimeout(() => {
+				contactForm.reset();
+				formStatus.className = 'form-status';
+				formStatus.textContent = '';
+			}, 5000);
+		} else {
+			// Show error message
+			formStatus.className = 'form-status error';
+			formStatus.textContent = '⚠ Please fix the errors above and try again.';
+		}
+	});
+
+	// Add custom cursor expansion to form inputs
+	const formInputs = 'input[type="email"], textarea, .form-submit-btn';
+	document.querySelectorAll(formInputs).forEach(el => {
+		el.addEventListener('mouseenter', () => cursor.classList.add('expand'));
+		el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
+	});
+}
+
