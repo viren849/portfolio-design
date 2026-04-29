@@ -322,8 +322,8 @@ function getProjectCard(project) {
 	let description = `<p class="card-text">${project.desp}</p>`;
 	let technologies = `<p class="project-skill-container">${getTechnologies(project.technologies)}</p>`;
 	let overlay = `<div class="overlay fade">`;
-	let source = `<a class="source" href ="${project.github}" target = "_blank"><img src="/static/images/projects/github.svg" class="github">Source</a>`;
-	let deploy = `<a class="source" href ="${project.deploy}" target = "_blank"><img src="/static/images/projects/deploy.svg" class="github">Deploy</a>`;
+	let source = `<a class="source" href ="${project.github}" target = "_blank"><img src="static/images/projects/github.svg" class="github">Source</a>`;
+	let deploy = `<a class="source" href ="${project.deploy}" target = "_blank"><img src="static/images/projects/deploy.svg" class="github">Deploy</a>`;
 	let foot = `</div></div>`;
 	if (project.deploy != '')
 		foot = deploy + foot;
@@ -340,7 +340,7 @@ function getTechnologies(technologies) {
 		} else if (tech === 'html') {
 			technology += `<i class="devicon-html5-plain colored project-skill" style="font-size: 30px; display: inline-block;"></i>`;
 		} else {
-			technology += `<img src="/static/images/projects/${tech}.svg" class="project-skill">`;
+			technology += `<img src="static/images/projects/${tech}.svg" class="project-skill">`;
 		}
 	}
 	return technology;
